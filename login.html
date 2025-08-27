@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Anime</title>    
+  <link rel="stylesheet" href="styles/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script>
+    const supabaseUrl = 'https://fwdqeibadcyxcvdcuqjt.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3ZHFlaWJhZGN5eGN2ZGN1cWp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MjU0ODIsImV4cCI6MjA3MTEwMTQ4Mn0.CAUlJIATUnRTsYig4THdEZiwBXS72CJxDCO-oBqj-pQ';
+    const Supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  </script>
+  <script src="scripts/script.js"></script>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h1 class="title">Anime List</h1>
+      <!-- <h1 class="title">アニメログイン</h1> -->
+
+        <div class="form-group">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="username" placeholder="ex: otaku123">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" placeholder="********">
+        </div>
+
+        <button class="login-btn" onclick="login(document.getElementById('username').value, document.getElementById('password').value);">Se connecter</button>
+    </div>
+  </div>
+</body>
+</html>
