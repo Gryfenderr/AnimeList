@@ -201,14 +201,18 @@ function clearModal() {
     document.getElementById('titrermji').value = '';
     document.getElementById('titreen').value = '';
     document.getElementById('languepref').value = 'EN';
-    document.getElementById('statut').value = 'toview';
-    StatutChange('toview');
+    // document.getElementById('statut').value = 'toview';
+    // StatutChange('toview');
+    document.getElementById('statut').value = 'finished';
+    StatutChange('finished');
     document.getElementById('seasonCount').value = '';
+    document.getElementById('seasonInputs').innerHTML = '';
     document.getElementById('previewImg').style.display = 'none';
     document.getElementById('checkboxsf').checked = false;
     document.getElementById('duree').value = '00:00';
     updateSeasonInputs();
     sfChange();
+    getIfAnimeExist(0);
 }
 
 function clearModal2() {
