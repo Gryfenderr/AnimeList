@@ -526,7 +526,12 @@
 
         addAnime(idanime, urlimg, nomnative, nomromaji, nomenglish, languepref, statut, nbsaisons, nbepisodes, saisonencours, epencours, detailsepsaison, checkboxsf, duree);
 
+        
         modal.classList.remove("show")
+        
+        let seasonInputs = document.getElementById('seasonInputs');
+        seasonInputs.innerHTML = '';
+        updateSeasonInputs();
 
         let timeoutTable = null;
         clearTimeout(timeoutTable);

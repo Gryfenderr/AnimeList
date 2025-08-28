@@ -210,6 +210,12 @@ function clearModal() {
     document.getElementById('previewImg').style.display = 'none';
     document.getElementById('checkboxsf').checked = false;
     document.getElementById('duree').value = '00:00';
+
+    const divs = document.querySelectorAll('.season-line');
+    divs.forEach(div => {
+        div.querySelector('input').value = '';
+    });
+
     updateSeasonInputs();
     sfChange();
     getIfAnimeExist(0);
