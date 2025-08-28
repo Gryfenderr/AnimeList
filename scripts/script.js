@@ -201,10 +201,10 @@ function clearModal() {
     document.getElementById('titrermji').value = '';
     document.getElementById('titreen').value = '';
     document.getElementById('languepref').value = 'EN';
-    // document.getElementById('statut').value = 'toview';
-    // StatutChange('toview');
-    document.getElementById('statut').value = 'finished';
-    StatutChange('finished');
+    document.getElementById('statut').value = 'toview';
+    StatutChange('toview');
+    // document.getElementById('statut').value = 'finished';
+    // StatutChange('finished');
     document.getElementById('seasonCount').value = '';
     document.getElementById('seasonInputs').innerHTML = '';
     document.getElementById('previewImg').style.display = 'none';
