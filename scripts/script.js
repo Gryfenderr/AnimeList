@@ -18,6 +18,20 @@ async function addAnime(idanime, urlimg, nomnative, nomromaji, nomenglish, langu
     if (detailsepsaison=="") {
         detailsepsaison = null;
     }
+    let detailsadonner = detailsepsaison;
+    if (detailsepsaison != null) {
+        let newdetailsepsaison = '';
+        let lstdetailsepsaison = detailsepsaison.split(',');
+        if (lstdetailsepsaison.length != nbsaisons) {
+            for (let i = 0; i < nbsaisons; i++) {
+                if (i!=0) {
+                    newdetailsepsaison += ',';
+                }
+                newdetailsepsaison += lstdetailsepsaison[i];
+            }
+            detailsadonner = newdetailsepsaison;
+        }
+    }
     const { data, error } = await Supabase
         .from(tablename)  
         .insert([{
@@ -33,7 +47,7 @@ async function addAnime(idanime, urlimg, nomnative, nomromaji, nomenglish, langu
             nbepisodes: nbepisodes, 
             saisonencours: saisonencours, 
             epencours: epencours, 
-            detailsepparsaison: detailsepsaison, 
+            detailsepparsaison: detailsadonner, 
             film: film, 
             duree: duree
         }])
