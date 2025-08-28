@@ -129,6 +129,7 @@
                     <label>Statut</label>
                     <select id="statut" onchange="StatutChange(this.value);">
                         <option value="toview" selected>À voir</option>
+                        <option value="next">Suivant</option>
                         <option value="watching">En cours</option>
                         <option value="finished">Terminé</option>
                         <option value="waiting">En attente</option>
@@ -232,8 +233,9 @@
 
                     <div class="form-group">
                     <label>Statut</label>
-                    <select id="statut-edit" onchange="StatutChange(this.value);">
+                    <select id="statut-edit" onchange="StatutChange2(this.value);">
                         <option value="toview" selected>À voir</option>
+                        <option value="next">Suivant</option>
                         <option value="watching">En cours</option>
                         <option value="finished">Terminé</option>
                         <option value="waiting">En attente</option>
@@ -638,11 +640,17 @@
     function StatutChange(newval) {
         if (newval == "watching" || newval == "waiting" || newval == "dropped") {
             document.getElementById('currentsvalues').style.display = 'flex';
-            document.getElementById('currentsvalues-edit').style.display = 'flex';
         } else {
             document.getElementById('currentsvalues').style.display = 'none';
             document.getElementById('currentseason').value = null;
             document.getElementById('currentep').value = null;
+        }
+    }
+
+    function StatutChange2(newval) {
+        if (newval == "watching" || newval == "waiting" || newval == "dropped") {
+            document.getElementById('currentsvalues-edit').style.display = 'flex';
+        } else {
             document.getElementById('currentsvalues-edit').style.display = 'none';
             document.getElementById('currentseason-edit').value = null;
             document.getElementById('currentep-edit').value = null;

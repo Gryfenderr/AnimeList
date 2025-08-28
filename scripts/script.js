@@ -165,6 +165,7 @@ function addAnimeRow({ id, img, title, saisons, episodes, status, saisonencours,
     tdStatus.classList.add("status", status.toLowerCase()); // ex: status="finished"
     tdStatus.textContent = 
         status === "toview" ? "À voir" :
+        status === "next" ? "Suivant" :
         status === "watching" ? "En cours" :
         status === "finished" ? "Terminé" :
         status === "waiting" ? "En attente" :
@@ -385,7 +386,7 @@ async function updaterow(id, nomnative, nomromaji, nomenglish, languepref, statu
     }
     console.log(nompref);
     let film_ = 0;
-    if (checkboxsf==true) {
+    if (film == true) {
         film_ = 1;
     }
     if (nbsaisons=="") {
