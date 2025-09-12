@@ -1,0 +1,797 @@
+/* Thème général */
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(135deg, #ff6f61, #d6336c);
+    text-align: center;
+    padding: 20px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+#comptes {
+  display: flex;
+  flex-direction: row;
+  margin-left: 75%;
+  margin-right: 5%;
+  margin-top: -2%;
+  justify-content: space-between;
+}
+
+/* Table */
+.table-container {
+  margin: 30px auto;
+  width: 90%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+thead {
+  background: #2d2d2d;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: center;
+}
+
+tbody tr {
+  transition: background 0.3s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+img {
+  width: 50px;
+  border-radius: 6px;
+  cursor:zoom-in
+}
+
+.letter-separator td {
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-align: left;
+  border: none;
+  padding: 8px 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+tr.favorite {
+  background: rgba(255, 215, 0, 0.12); /* plus lumineux */
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.8),
+              0 0 10px rgba(255, 215, 0, 0.6); /* halo externe */
+  border: 1px solid gold; /* léger contour */
+}
+
+tr.flag {
+  box-shadow: inset 0 0 15px #1e90ff,
+              0 0 10px #1e90ff; /* halo externe */
+  border: 1px solid #1e90ff; /* léger contour */
+}
+
+
+
+/* Statuts colorés */
+.status.watching { color: #4ecdc4; font-weight: bold; }
+.status.finished { color: #ffd93d; font-weight: bold; }
+.status.waiting { color: #ff6b6b; font-weight: bold; }
+
+/* Actions */
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.2);
+}
+
+/* Bouton flottant */
+.fab {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #ff6b6b;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.fab#LogOut{
+  top: 30px;
+  bottom: auto;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  background: #e63946;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #1e1e1e;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 95%;
+  animation: fadeInUp 0.4s ease;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.modal-content input,
+.modal-content select {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  margin-bottom: 10px;
+  background: #2d2d2d;
+  color: white;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.cancel {
+  background: #555;
+  color: white;
+}
+
+.delete {
+  background: red;
+  color: white;
+  margin-right: 11%;
+}
+
+.add {
+  background: #ff6b6b;
+  color: white;
+}
+
+.add:hover {
+  background: #e63946;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Formulaire horizontal */
+.form-horizontal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group-currentvalues {
+  flex: 0;
+  display: none;
+  flex-direction: row;
+}
+
+.form-group-currentvalues input {
+  width: 75%;
+}
+
+.form-group-duree {
+  display: none;
+}
+
+.form-group.small {
+  flex: 0.5;
+}
+
+.form-group.tiny {
+  flex: 0.3;
+}
+
+.modal-content input,
+.modal-content select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: #2d2d2d;
+  color: white;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border: 2px solid #ff6b6b;
+  box-shadow: 0 0 8px rgba(255,107,107,0.6);
+  outline: none;
+}
+
+/* Modal large */
+.modal-content.wide {
+  width: 700px;   /* plus large */
+  max-width: 95%; 
+}
+
+/* Layout deux colonnes */
+.form-two-col {
+  display: flex;
+  gap: 60px;
+}
+
+.form-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-col.left {
+  flex: 1.2; /* plus d’espace pour les titres */
+}
+
+.form-col.right {
+  flex: 0.8;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: #2d2d2d;
+  color: white;
+  font-size: 0.95rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border: 2px solid #ff6b6b;
+  box-shadow: 0 0 8px rgba(255,107,107,0.6);
+  outline: none;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-group.small {
+  flex: 1;
+}
+
+/* Saison inputs dynamiques */
+#seasonInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.season-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.season-line span {
+  width: 80px;
+  font-size: 0.9rem;
+}
+
+/* === Formulaire avec scrollbar === */
+.modal-content.wide {
+  max-height: 80vh;   /* empêche de dépasser l'écran */
+  overflow-y: auto;   /* ajoute une scrollbar verticale */
+  scrollbar-width: thin;         /* Firefox */
+  scrollbar-color: #ff6f61 #222; /* Firefox */
+}
+
+/* Scrollbar Chrome/Edge */
+.modal-content.wide::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content.wide::-webkit-scrollbar-track {
+  background: #222;
+  border-radius: 10px;
+}
+.modal-content.wide::-webkit-scrollbar-thumb {
+  background: #ff6f61;
+  border-radius: 10px;
+}
+.modal-content.wide::-webkit-scrollbar-thumb:hover {
+  background: #ff3b2f;
+}
+
+/* === Style inputs number === */
+input[type="number"] {
+  -moz-appearance: textfield; /* enlève les flèches par défaut Firefox */
+  appearance: textfield;
+  padding-right: 24px; /* espace pour nos flèches custom */
+  position: relative;
+}
+
+/* Supprimer flèches Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Flèches custom */
+input[type="number"] {
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: #111;
+  color: #eee;
+  padding: 6px 8px;
+}
+
+input[type="number"]::after,
+input[type="number"]::before {
+  content: '';
+  position: absolute;
+  right: 8px;
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  pointer-events: none;
+}
+
+input[type="number"]::after {
+  top: 6px;
+  border-bottom: 6px solid #ff6f61; /* flèche haut */
+}
+
+input[type="number"]::before {
+  bottom: 6px;
+  border-top: 6px solid #ff6f61; /* flèche bas */
+}
+
+
+
+/* Container du switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 36px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Cacher la checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Fond du switch */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #1c1c1c;
+  border-radius: 30px;
+  transition: 0.4s;
+  box-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+
+/* Le cercle qui bouge */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 28px;
+  width: 28px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #ff4f8b; /* rose flashy anime */
+  border-radius: 50%;
+  transition: 0.4s;
+  box-shadow: 0 0 8px rgba(255,79,139,0.7);
+}
+
+/* Texte Série / Film */
+.labels {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 80%;
+  transform: translateY(-50%);
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.labels::before {
+  content: attr(data-off);
+}
+
+input:checked ~ .labels::before {
+  content: attr(data-on);
+}
+
+/* Quand activé (film) */
+input:checked + .slider {
+  background-color: #2b2b2b;
+}
+
+input:checked + .slider::before {
+  transform: translateX(44px);
+  background-color: #4f9dff; /* bleu anime */
+  box-shadow: 0 0 8px rgba(79,157,255,0.7);
+}
+
+
+.police{
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+
+
+.star-checkbox {
+  position: absolute;
+  top: -25px;   /* ajuste selon ton design */
+  right: 15px; /* colle à droite */
+  cursor: pointer;
+  font-size: 2rem;
+  color: #666;  /* étoile grise par défaut */
+  user-select: none;
+  z-index: 10;  /* au-dessus de l'image */
+}
+
+.star-checkbox input {
+  display: none;
+}
+
+.star-checkbox .star {
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.star-checkbox input:checked + .star {
+  color: gold;
+  text-shadow: 0 0 8px gold, 0 0 15px orange;
+  transform: scale(1.2); /* petit effet pop */
+}
+
+
+
+
+.flag-checkbox-alt {
+  position: absolute;
+  top: -22px;   /* ajuste selon ton design */
+  right: 55px; /* colle à droite */
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #666; /* gris par défaut */
+  user-select: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.flag-checkbox-alt input {
+  display: none;
+}
+
+.flag-icon {
+  display: inline-block;
+}
+
+.flag-checkbox-alt input:checked + .flag-icon {
+  color: #1e90ff; /* bleu lumineux */
+  text-shadow: 0 0 8px #1e90ff, 0 0 15px rgba(30, 144, 255, 0.8);
+  transform: scale(1.15); /* petit effet pop */
+}
+
+/* Lightbox zoom */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);background:#0b0f1d; cursor:zoom-out; width: auto; height: 75%;}
+
+
+
+
+/* sort btn nom */
+.sort-btn {
+  background: #2d2d2d;         /* gris foncé */
+  color: #ddd;                 /* gris clair pour le texte */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  margin-left: 10%;
+  margin-right: -10%;
+}
+
+.sort-btn:hover {
+  background: #3a3a3a;         /* gris un peu plus clair au hover */
+  transform: scale(1.05);
+  color: #fff;                 /* blanc au hover */
+}
+
+.sort-btn[data-order="asc"] {
+  background: #2b2b2b;         /* état normal (A → Z) */
+}
+
+.sort-btn[data-order="desc"] {
+  background: #444;            /* état inversé (Z → A) */
+}
+
+
+
+
+
+/* sort btn stat */
+.filter-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.filter-btn {
+  background: #2d2d2d;
+  color: #ddd;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+.filter-btn:hover {
+  background: #3a3a3a;
+  transform: scale(1.05);
+  color: #fff;
+}
+
+.filter-dropdown {
+  display: none;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  padding: 12px;
+  z-index: 100;
+  /* min-width: 200px;max-height: 250px;
+  overflow-y: auto;     */
+}
+
+.filter-dropdown label {
+  display: block;
+  color: #ccc;
+  font-size: 0.95rem;
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+.filter-dropdown input[type="checkbox"],
+.filter-dropdown input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #666; /* couleur de base */
+}
+
+.filter-dropdown input:checked {
+  accent-color: #1e90ff; /* bleu si activé */
+}
+
+.filter-order {
+  margin-bottom: 10px;
+}
+
+.filter-dropdown hr {
+  border: none;
+  height: 1px;
+  background: #333;
+  margin: 10px 0;
+}
+
+.filter-dropdown {
+  display: none;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  padding: 12px;
+  z-index: 100;
+  min-width: 220px;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Animation légère à l'ouverture */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.filter-dropdown label {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin: 4px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #ccc;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.filter-dropdown label:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+/* Ordre asc/desc */
+.filter-order {
+  padding: 6px 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.filter-order label {
+  margin: 4px 0;
+}
+
+/* Inputs */
+.filter-dropdown input[type="checkbox"],
+.filter-dropdown input[type="radio"] {
+  accent-color: #1e90ff; /* bleu en cohérence avec ton site */
+  margin-right: 8px;
+}
+
+/* Glow quand activé */
+.filter-dropdown input:checked + span,
+.filter-dropdown input:checked + label {
+  color: #fff;
+  text-shadow: 0 0 6px #1e90ff;
+}
+/* On cache les vrais inputs */
+.filter-dropdown input[type="checkbox"],
+.filter-dropdown input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #666;
+  border-radius: 4px; /* carré par défaut */
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+  background: #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+/* Style coché */
+.filter-dropdown input[type="checkbox"]:checked {
+  border-color: #1e90ff;
+  background: #1e90ff;
+  box-shadow: 0 0 6px #1e90ff;
+}
+
+/* Ajout d'une coche ✓ */
+.filter-dropdown input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+/* Radios */
+.filter-dropdown input[type="radio"] {
+  border-radius: 50%; /* rond */
+}
+
+.filter-dropdown input[type="radio"]:checked {
+  border-color: #1e90ff;
+  box-shadow: 0 0 6px #1e90ff;
+  background: #1e90ff;
+}
+
+/* Cercle interne pour radio */
+.filter-dropdown input[type="radio"]:checked::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

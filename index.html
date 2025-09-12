@@ -25,7 +25,7 @@
         <h5 id="cptfinish">0/0 Terminés</h5>
     </div>
   </header>
-  
+
 
   <main>
     <div class="table-container">
@@ -33,9 +33,42 @@
         <thead>
           <tr>
             <th>Image</th>
-            <th>Nom</th>
+            <th>
+                <span style="margin-left: 5%;">Nom</span>
+                <button class="sort-btn" id="sortAlpha" data-order="asc">
+                    A → Z
+                </button>
+            </th>
             <th>Progression</th>
-            <th>Statut</th>
+            <th>
+                <span style="margin-left: 5%; margin-right: 5%;">Statut</span>
+                <div class="filter-menu">
+                    <button class="filter-btn" id="statusFilterBtn">▾</button>
+                    <div class="filter-dropdown" id="statusFilterDropdown">
+                        <div class="filter-order">
+                        <label>
+                            <input type="radio" name="statusOrder" value="asc" checked>
+                            Croissant ↑
+                        </label>
+                        <label>
+                            <input type="radio" name="statusOrder" value="desc">
+                            Décroissant ↓
+                        </label>
+                        </div>
+                        <hr>
+                        <div class="filter-options">
+                        <label><input type="checkbox" name="statusName" value="toview" checked> À Voir</label>
+                        <label><input type="checkbox" name="statusName" value="next" checked> Suivant</label>
+                        <label><input type="checkbox" name="statusName" value="watching" checked> En Cours</label>
+                        <label><input type="checkbox" name="statusName" value="finished" checked> Terminé</label>
+                        <label><input type="checkbox" name="statusName" value="waiting" checked> En attente</label>
+                        <label><input type="checkbox" name="statusName" value="dropped" checked> Abandonné</label>
+                        <label><input type="checkbox" name="statusName" value="restart" checked> Recommencer</label>
+                        <label><input type="checkbox" name="statusName" value="again" checked> À Revoir</label>
+                        </div>
+                    </div>
+                </div>
+            </th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -74,14 +107,33 @@
 
   <!-- Bouton flottant -->
   <button class="fab" id="openForm">＋</button>
-  <button class="fab" id="LogOut" onclick="LogOut();">⍈</button>
+  <button class="fab" id="LogOut" onclick="LogOut();" aria-label="Logout">
+    <svg xmlns="http://www.w3.org/2000/svg" 
+        width="24" height="24" viewBox="0 0 24 24" 
+        fill="none" stroke="white" stroke-width="2" 
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+    </svg>
+  </button>
 
     <!-- Formulaire flottant d'ajout -->
     <div class="modal" id="animeForm">
         <div class="modal-content wide">
-            <h2 class="police">Ajouter un Anime</h2>
+            <div style="position: relative;">
+                <h2 class="police">Ajouter un Anime</h2>
+                <label class="flag-checkbox-alt">
+                    <input type="checkbox" name="flag" id="flag" />
+                    <span class="flag-icon">⚑</span>
+                </label>
+                <label class="star-checkbox">
+                    <input type="checkbox" name="favorite" id="favorite" />
+                    <span class="star">★</span>
+                </label>
+            </div>
             <form class="form-two-col">
-            <!-- Colonne gauche (titres) -->
+                <!-- Colonne gauche (titres) -->
                 <div class="form-col left">
                     <div class="form-group">
                         <label>Rechercher</label>
@@ -135,6 +187,7 @@
                         <option value="waiting">En attente</option>
                         <option value="dropped">Abandonné</option>
                         <option value="restart">Recommencer</option>
+                        <option value="again">À Revoir</option>
                     </select>
                     </div>
 
@@ -187,11 +240,20 @@
     </div>  
 
 
-
     <!-- Formulaire flottant de modif -->
     <div class="modal" id="animeForm-edit">
         <div class="modal-content wide">
-            <h2 class="police">Modifier</h2>
+            <div style="position: relative;">
+                <h2 class="police">Modifier</h2>
+                <label class="flag-checkbox-alt">
+                    <input type="checkbox" name="flag-edit" id="flag-edit" />
+                    <span class="flag-icon">⚑</span>
+                </label>
+                <label class="star-checkbox">
+                    <input type="checkbox" name="favorite-edit" id="favorite-edit" />
+                    <span class="star">★</span>
+                </label>
+            </div>
             <form class="form-two-col">
             <!-- Colonne gauche (titres) -->
                 <div class="form-col left">
@@ -241,6 +303,7 @@
                         <option value="waiting">En attente</option>
                         <option value="dropped">Abandonné</option>
                         <option value="restart">Recommencer</option>
+                        <option value="again">À Revoir</option>
                     </select>
                     </div>
 
@@ -293,13 +356,23 @@
         </div>
     </div>  
 
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="this.classList.remove('open')">
+        <img id="lightboxImg" src="" alt="zoom">
+    </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<!-- Références Supabases -->
 <script>
   const supabaseUrl = 'https://fwdqeibadcyxcvdcuqjt.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3ZHFlaWJhZGN5eGN2ZGN1cWp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MjU0ODIsImV4cCI6MjA3MTEwMTQ4Mn0.CAUlJIATUnRTsYig4THdEZiwBXS72CJxDCO-oBqj-pQ';
   const Supabase = supabase.createClient(supabaseUrl, supabaseKey);
 </script>
+
+<!-- removeModal & Gestion dynamique des saisons -->
 <script>
   const openBtn = document.getElementById("openForm");
   const modal = document.getElementById("animeForm");
@@ -368,6 +441,8 @@
   }
   seasonCountInput2.addEventListener("input", updateSeasonInputs2);
 </script>
+
+<!-- API -->
 <script>
     const titreSearch = document.getElementById('titreSearch');
     const imgPreview = document.getElementById('previewImg');
@@ -465,6 +540,8 @@
         }, 500); // délai pour éviter trop de requêtes
     });
 </script>
+
+<!-- addBtnClick -->
 <script>
     function addBtnClick () {
         let urlimg = document.getElementById('imgURL').value;
@@ -479,6 +556,18 @@
         let checkboxsf = document.getElementById('checkboxsf').checked;
         let duree = document.getElementById('duree').value;
         const divs = document.querySelectorAll('.season-line');
+        const champ_favori = document.getElementById('favorite');
+        const champ_flag = document.getElementById('flag');
+        
+        let favori = 0;
+        if (champ_favori.checked == true) {
+            favori = 1;
+        }
+        
+        let flag = 0;
+        if (champ_flag.checked == true) {
+            flag = 1;
+        }
 
         let listep = [];
         let detailsepsaison = "";
@@ -528,7 +617,7 @@
         // console.log("checkboxsf : " + checkboxsf);
         // console.log("duree : " + duree);
 
-        addAnime(idanime, urlimg, nomnative, nomromaji, nomenglish, languepref, statut, nbsaisons, nbepisodes, saisonencours, epencours, detailsepsaison, checkboxsf, duree);
+        addAnime(idanime, urlimg, nomnative, nomromaji, nomenglish, languepref, statut, nbsaisons, nbepisodes, saisonencours, epencours, detailsepsaison, checkboxsf, duree, favori, flag);
 
         console.log(detailsepsaison);
 
@@ -547,6 +636,8 @@
         }, 500);
     };
 </script>
+
+<!-- editBtnClick & delBtnClick -->
 <script>
     function editBtnClick() {
         let rowid = document.getElementById('rowid').value;
@@ -562,6 +653,19 @@
         let checkboxsf = document.getElementById('checkboxsf-edit').checked;
         let duree = document.getElementById('duree-edit').value;
         const divs = document.querySelectorAll('.season-line');
+        const champ_favori = document.getElementById('favorite-edit');
+        const champ_flag = document.getElementById('flag-edit');
+        
+        let favori = 0;
+        if (champ_favori.checked == true) {
+            favori = 1;
+        }
+        
+        let flag = 0;
+        if (champ_flag.checked == true) {
+            flag = 1;
+        }
+
 
         let listep = [];
         let detailsepsaison = "";
@@ -594,7 +698,7 @@
             epencours = 1;
         }
         
-        updaterow(rowid, nomnative, nomromaji, nomenglish, languepref, statut, nbsaisons, nbepisodes, saisonencours, epencours, detailsepsaison, checkboxsf, duree)
+        updaterow(rowid, nomnative, nomromaji, nomenglish, languepref, statut, nbsaisons, nbepisodes, saisonencours, epencours, detailsepsaison, checkboxsf, duree, favori, flag)
 
         modal2.classList.remove("show")
 
@@ -631,6 +735,8 @@
         }
     }
 </script>
+
+<!-- LogOut & StatutChange & sfChange  -->
 <script>
     function LogOut() {
         sessionStorage.clear();
@@ -682,9 +788,107 @@
         }
     }
 </script>
+
+<!-- selectList & printCounts -->
 <script>
     selectList();
     printCounts();
+</script>
+
+<!-- Zoom image -->
+<script>
+// Zoom image
+function zoomimg() {
+    let timeoutZoom = null;
+    clearTimeout(timeoutZoom);
+    timeoutZoom = setTimeout(() => {
+        (function(){
+            // console.log(document.getElementById('lightbox'));
+            // console.log(document.getElementById('lightboxImg'));
+            // console.log(document.querySelectorAll('.zoomable'));
+            const lb=document.getElementById('lightbox'), img=document.getElementById('lightboxImg');
+            document.querySelectorAll('.zoomable').forEach(z=>{
+                z.addEventListener('click', (e)=>{
+                    e.preventDefault();
+                    img.src = z.getAttribute('src');
+                    lb.classList.add('open');
+                });
+            });
+        })();
+    }, 1500);
+}
+zoomimg();
+</script>
+
+<!-- Sort Alpha -->
+<script>
+    document.getElementById("sortAlpha").addEventListener("click", function() {
+    let order = this.getAttribute("data-order");
+
+    if(order === "asc") {
+        this.setAttribute("data-order", "desc");
+        this.textContent = "Z → A";
+        // appel tri décroissant ici
+        selectList('nompref', false);
+        zoomimg();
+    } else {
+        this.setAttribute("data-order", "asc");
+        this.textContent = "A → Z";
+        // appel tri croissant ici
+        selectList('nompref', true);
+        zoomimg();
+    }
+    });
+
+
+</script>
+
+<!-- Sort status -->
+<script>
+    const filterBtn = document.getElementById("statusFilterBtn");
+    const filterDropdown = document.getElementById("statusFilterDropdown");
+
+    filterBtn.addEventListener("click", () => {
+    filterDropdown.style.display = 
+        filterDropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Fermer si clic à l’extérieur
+    document.addEventListener("click", (e) => {
+    if (!filterBtn.contains(e.target) && !filterDropdown.contains(e.target)) {
+        filterDropdown.style.display = "none";
+    }
+    });
+
+    // Exemple récupération
+    // function getStatusFilters() {
+    // const order = document.querySelector('input[name="statusOrder"]:checked').value;
+    // const statuses = [...document.querySelectorAll('.filter-options input:checked')].map(cb => cb.value);
+    // return { order, statuses };
+    // }
+
+
+    let selectedStatuses = [];
+    function handleFilterChange() {
+        // 1. Récup tri asc/desc
+        const orderRadio = document.querySelector('input[name="statusOrder"]:checked');
+        if (orderRadio) {
+            asc = orderRadio.value === "asc"; 
+            // ⚠️ ici, mets "asc"/"desc" dans tes <input value="">
+        }
+
+        // 2. Récup statuts cochés
+        selectedStatuses = Array.from(
+            document.querySelectorAll('input[name="statusName"]:checked')
+        ).map(el => el.value);
+
+        // 3. Appelle ta fonction
+        selectList("statut", asc, selectedStatuses);
+    }
+
+    document.querySelectorAll('.filter-dropdown input').forEach(el => {
+        el.addEventListener('change', handleFilterChange);
+    });
 </script>
 </body>
 </html>
