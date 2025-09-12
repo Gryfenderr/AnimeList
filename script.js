@@ -74,6 +74,10 @@ async function selectList(orderby = "nompref", asc = true, statusArray = ["tovie
 
         query = query.order(orderby, { ascending: asc });
 
+        if (orderby != "nompref") {
+            query = query.order('nompref', { ascending: asc });
+        }
+
     let { data, error } = await query;
     if (error) console.error(error);
     // console.log("SELECT:", datas);
